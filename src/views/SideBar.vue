@@ -21,28 +21,6 @@
       <span class="mr-2">Latest Release</span>
       <v-icon>mdi-open-in-new</v-icon>
     </v-btn>
-
-    <v-navigation-drawer absolute bottom temporary>
-      <v-list nav dense>
-        <v-list-item-group active-class="deep-purple--text text--accent-4">
-          <v-list-item>
-            <v-list-item-title>Foo</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Bar</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Fizz</v-list-item-title>
-          </v-list-item>
-
-          <v-list-item>
-            <v-list-item-title>Buzz</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
   </v-app-bar>
 </template>
 
