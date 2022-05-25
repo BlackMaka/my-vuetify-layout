@@ -40,11 +40,17 @@
 </template>
 
 <script>
-export default {
-  name: "App",
+  export default {
+    name: 'App',
 
-  data: () => ({
-    //
-  }),
-};
+    data: () => ({
+      //
+    }),
+  };
 </script>
+
+<style scoped>
+  div {
+    font-size: 10px;
+  }
+</style>
