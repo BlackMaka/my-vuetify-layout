@@ -1,8 +1,11 @@
 <template>
   <v-container fluid>
     <v-row>
-      <v-col cols="12" sm="6" md="4" lg="3" v-for="i in 12" :key="i">
-        <v-card class="mx-auto" max-width="400">
+      <v-col cols="6" sm="4" md="3" lg="3" v-for="i in 12" :key="i">
+        <v-card
+          class="mx-auto"
+          :max-width="(250 && $vuetify.breakpoint.md) || 400"
+        >
           <v-img
             class="white--text align-end"
             height="200px"
@@ -31,7 +34,11 @@
 </template>
 
 <script>
-  export default {};
+  export default {
+    mounted() {
+      console.log(this.$vuetify.breakpoint.md);
+    },
+  };
 </script>
 
 <style></style>
