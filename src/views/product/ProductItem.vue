@@ -4,7 +4,10 @@
       <v-col cols="6" sm="4" md="3" lg="3" v-for="i in 12" :key="i">
         <v-card
           class="mx-auto"
-          :max-width="(250 && $vuetify.breakpoint.md) || 400"
+          :max-width="
+            ($vuetify.breakpoint.mdAndDown && 250) ||
+            ($vuetify.breakpoint.mdAndUp && 400)
+          "
         >
           <v-img
             class="white--text align-end"
