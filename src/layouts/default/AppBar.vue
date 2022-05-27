@@ -35,7 +35,19 @@
   <!-- <v-toolbar color="white"> -->
   <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click.stop="$emit('drawer')"></v-app-bar-nav-icon>
-    <v-toolbar-title>State selection</v-toolbar-title>
+    <!-- <v-btn icon @click.stop="$emit('drawer')">
+      <v-icon>mdi-filter-menu-outline</v-icon>
+    </v-btn> -->
+
+    <v-toolbar-title>
+      <v-img
+        alt="Vuetify Logo"
+        class="shrink mr-2"
+        contain
+        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+        transition="scale-transition"
+        width="40"
+    /></v-toolbar-title>
     <!-- <div class="d-flex align-center">
       <v-img
         alt="Vuetify Logo"
@@ -69,7 +81,7 @@
       solo-inverted
     ></v-autocomplete>
     <v-btn icon>
-      <v-icon>mdi-dots-vertical</v-icon>
+      <v-icon>mdi-bell-outline</v-icon>
     </v-btn>
   </v-app-bar>
   <!-- </v-toolbar> -->

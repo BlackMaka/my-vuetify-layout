@@ -75,7 +75,7 @@
                   <v-img :src="item.url"></v-img>
                 </template>
                 <template v-else>
-                  <v-card-text v-text="item.text"></v-card-text>
+                  <v-card-text class="mb-10" v-text="item.text"></v-card-text>
                 </template>
               </v-card>
             </v-tab-item>
