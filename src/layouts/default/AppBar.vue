@@ -32,7 +32,8 @@
     </v-btn>
   </v-app-bar> -->
 
-  <v-toolbar dark color="primary">
+  <!-- <v-toolbar color="white"> -->
+  <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click.stop="$emit('drawer')"></v-app-bar-nav-icon>
     <v-toolbar-title>State selection</v-toolbar-title>
     <!-- <div class="d-flex align-center">
@@ -70,7 +71,8 @@
     <v-btn icon>
       <v-icon>mdi-dots-vertical</v-icon>
     </v-btn>
-  </v-toolbar>
+  </v-app-bar>
+  <!-- </v-toolbar> -->
 </template>
 
 <script>

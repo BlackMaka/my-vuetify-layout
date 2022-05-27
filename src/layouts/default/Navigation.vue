@@ -3,7 +3,7 @@
     <v-container>
       <v-list>
         <v-list-item>
-          <Badges
+          <BadgesCmp
             bordered
             offset-x="30"
             offset-y="20"
@@ -13,7 +13,7 @@
             <v-list-item-avatar>
               <img src="https://cdn.vuetifyjs.com/images/lists/2.jpg" />
             </v-list-item-avatar>
-          </Badges>
+          </BadgesCmp>
 
           <v-list-item-content>
             <v-list-item-title
@@ -130,11 +130,11 @@
 </template>
 
 <script>
-  import Badges from '@/components/Badges.vue';
+  import BadgesCmp from '@/components/BadgesCmp.vue';
   //import Avatar from '@/components/Avatar.vue';
   export default {
     components: {
-      Badges,
+      BadgesCmp,
       //Avatar,
     },
     data() {

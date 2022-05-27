@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <BackGround roundCustom class="grey lighten-2 mt-5 mb-3 mx-3 px-3">
+    <BackGroundCmp roundCustom class="grey lighten-2 mt-5 mb-3 mx-3 px-3">
       <v-row justify="center" v-for="i in 2" :key="i">
         <v-col cols="4">
           <v-card>
@@ -55,9 +55,9 @@
           ></v-checkbox>
         </v-col> -->
       </v-row>
-    </BackGround>
+    </BackGroundCmp>
 
-    <BackGround
+    <BackGroundCmp
       roundCustom
       class="grey lighten-2 mt-8 mb-3 mx-3 overflow-x-auto overflow-y-hidden"
       style="display: flex"
@@ -82,23 +82,23 @@
           </div>
         </v-col>
       </v-row>
-    </BackGround>
+    </BackGroundCmp>
 
-    <BackGround roundCustom class="grey lighten-2 mt-8 mb-3 mx-3">
-      <ProductItem />
-    </BackGround>
+    <BackGroundCmp roundCustom class="grey lighten-2 mt-8 mb-3 mx-3">
+      <ProductItems />
+    </BackGroundCmp>
 
-    <ProductItem />
+    <!-- <ProductItems /> -->
   </v-container>
 </template>
 
 <script>
-  import ProductItem from '@/views/product/ProductItem.vue';
-  import BackGround from '@/components/BackGround.vue';
+  import ProductItems from '@/views/product/ProductItems.vue';
+  import BackGroundCmp from '@/components/BackGroundCmp.vue';
   export default {
     components: {
-      ProductItem,
-      BackGround,
+      ProductItems,
+      BackGroundCmp,
     },
     data() {
       return {
