@@ -68,7 +68,7 @@
             <v-list-item-subtitle>
               <v-row justify="center">
                 <v-col cols="6" sm="6" md="4" lg="3" v-for="i in 6" :key="i">
-                  <v-card class="mt-5">
+                  <v-card class="mt-5" outlined>
                     <v-img
                       class="mx-auto"
                       width="50%"
@@ -91,7 +91,7 @@
             <v-list-item-subtitle>
               <v-row justify="center">
                 <v-col cols="12">
-                  <v-card class="mx-auto mt-5" outlined fluid>
+                  <v-card class="mx-auto mt-5" outlined>
                     <v-list-item three-line>
                       <v-list-item-content>
                         <div class="text-overline mb-4">FAQ/공지사항</div>

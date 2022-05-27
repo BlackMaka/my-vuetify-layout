@@ -14,21 +14,26 @@
             height="200px"
             src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
           >
-            <v-card-title>Top 10 Australian beaches</v-card-title>
+            <!-- <v-card-title>Top 10 Australian beaches</v-card-title> -->
           </v-img>
 
-          <v-card-subtitle class="pb-0"> Number 10 </v-card-subtitle>
+          <v-card-subtitle class="pb-0"> 상품이름 </v-card-subtitle>
 
           <v-card-text class="text--primary">
-            <div>Whitehaven Beach</div>
+            <div>30,000</div>
 
-            <div>Whitsunday Island, Whitsunday Islands</div>
+            <div><del>45,000</del></div>
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="orange" text> Share </v-btn>
+            <v-btn color="green" text>
+              구매하기 <v-icon>mdi-purse-outline</v-icon>
+            </v-btn>
 
-            <v-btn color="orange" text> Explore </v-btn>
+            <v-btn color="pink" text>
+              찜하기 <v-icon>mdi-heart</v-icon>
+              <v-icon>mdi-heart-outline</v-icon>
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

@@ -1,6 +1,6 @@
 <template>
   <!-- style="background-color: blue; " -->
-  <div :class="{ roundCustom: true }" v-bind="$attrs">
+  <div :class="{ roundCustom }" class="outlineCustom" v-bind="$attrs">
     <slot></slot>
   </div>
 </template>
@@ -9,7 +9,7 @@
   export default {
     inheritAttrs: false,
     props: {
-      rounded: {
+      roundCustom: {
         type: Boolean,
         default: false,
       },
@@ -18,10 +18,7 @@
 </script>
 
 <style>
-  .bgColor {
-    background-color: red;
-  }
   .roundCustom {
-    border-radius: 20px;
+    border-radius: 15px;
   }
 </style>
