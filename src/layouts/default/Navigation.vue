@@ -1,38 +1,5 @@
 <template>
   <v-navigation-drawer app v-bind="$attrs">
-    <!-- <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="text-h6">
-          <Badges
-            bordered
-            offset-x="30"
-            offset-y="20"
-            color="red accent-7"
-            content="6"
-          >
-            <Avatar
-              size="50"
-              src="https://cdn.vuetifyjs.com/images/lists/2.jpg"
-            ></Avatar>
-          </Badges>
-        </v-list-item-title>
-
-        <v-list-item-subtitle> test</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item> -->
-
-    <!-- <v-list dense nav>
-      <v-list-item v-for="item in items" :key="item.title" link>
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>{{ item.title }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list> -->
-
     <v-container>
       <v-list>
         <v-list-item>
