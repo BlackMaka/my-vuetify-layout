@@ -35,7 +35,12 @@
             <v-list-item-subtitle>
               <v-row justify="center">
                 <v-col cols="6" sm="6" md="4" lg="3" v-for="i in 6" :key="i">
-                  <v-card class="mt-5" outlined>
+                  <v-card
+                    class="mt-5"
+                    outlined
+                    to="/products"
+                    @click.stop="$emit('drawer')"
+                  >
                     <v-img
                       class="mx-auto"
                       width="50%"

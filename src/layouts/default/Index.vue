@@ -1,7 +1,13 @@
 <template>
   <v-app>
     <DefaultAppbar @drawer="drawer = !drawer" />
-    <DefaultNavigation v-model="drawer" temporary width="80%" height="100%" />
+    <DefaultNavigation
+      v-model="drawer"
+      temporary
+      width="80%"
+      height="100%"
+      @drawer="drawer = !drawer"
+    />
     <DefaultView />
   </v-app>
 </template>

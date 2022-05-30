@@ -3,17 +3,22 @@
     class="mx-auto"
     :max-width="
       (!!selfMaxWidth && selfMaxWidth) ||
-      ($vuetify.breakpoint.mdAndDown && 250) ||
-      ($vuetify.breakpoint.mdAndUp && 400)
+      ($vuetify.breakpoint.mdAndDown && 500) ||
+      ($vuetify.breakpoint.mdAndUp && 700)
     "
     v-bind="$attrs"
+    to="/product-detail/3"
   >
     <v-img
       class="white--text align-end"
       height="200px"
       src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+      align="right"
     >
-      <!-- <v-card-title>Top 10 Australian beaches</v-card-title> -->
+      <v-btn color="pink" text>
+        <v-icon>mdi-heart</v-icon>
+        <v-icon>mdi-heart-outline</v-icon>
+      </v-btn>
     </v-img>
 
     <v-card-subtitle class="pb-0"> 상품이름 </v-card-subtitle>
@@ -24,16 +29,19 @@
       <div><del>45,000</del></div>
     </v-card-text>
 
-    <v-card-actions>
-      <v-btn color="green" text>
-        구매하기 <v-icon>mdi-purse-outline</v-icon>
+    <div align="center">
+      <!-- <v-btn color="black" dark width="45%" class="my-2 mx-1">
+        선물하기
+        
       </v-btn>
-
-      <v-btn color="pink" text>
-        찜하기 <v-icon>mdi-heart</v-icon>
-        <v-icon>mdi-heart-outline</v-icon>
+      <v-btn color="black" dark width="45%" class="my-2 mx-1">
+        구매하기
+      </v-btn> -->
+      <v-btn color="black" dark width="95%" class="my-2">
+        구매하기
+        <!-- <v-icon>mdi-purse-outline</v-icon> -->
       </v-btn>
-    </v-card-actions>
+    </div>
   </v-card>
 </template>
 
