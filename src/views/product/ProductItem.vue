@@ -15,10 +15,6 @@
       src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
       align="right"
     >
-      <v-btn color="pink" text>
-        <v-icon>mdi-heart</v-icon>
-        <v-icon>mdi-heart-outline</v-icon>
-      </v-btn>
     </v-img>
 
     <v-card-subtitle class="pb-0"> 상품이름 </v-card-subtitle>
@@ -29,19 +25,12 @@
       <div><del>45,000</del></div>
     </v-card-text>
 
-    <div align="center">
-      <!-- <v-btn color="black" dark width="45%" class="my-2 mx-1">
-        선물하기
-        
-      </v-btn>
-      <v-btn color="black" dark width="45%" class="my-2 mx-1">
-        구매하기
-      </v-btn> -->
+    <!-- <div align="center">
       <v-btn color="black" dark width="95%" class="my-2">
-        구매하기
-        <!-- <v-icon>mdi-purse-outline</v-icon> -->
-      </v-btn>
-    </div>
+        구매하기 -->
+    <!-- <v-icon>mdi-purse-outline</v-icon> -->
+    <!-- </v-btn>
+    </div> -->
   </v-card>
 </template>
 
@@ -52,6 +41,11 @@
         type: Number,
         default: 0,
       },
+    },
+    data() {
+      return {
+        overlay: false,
+      };
     },
     mounted() {
       console.log(this.$vuetify.breakpoint.md);

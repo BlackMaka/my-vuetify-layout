@@ -7,12 +7,18 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'DefaultLayouts',
+    name: 'DefaultLayout',
     component: () =>
       import(
-        /* webpackChunkName: "defaultlayout" */ '@/layouts/default/Index.vue'
+        /* webpackChunkName: "DefaultLayout" */ '@/layouts/default/Index.vue'
       ),
     children: [
+      {
+        path: '/main',
+        name: 'Main',
+        component: () =>
+          import(/* webpackChunkName: "main" */ '../views/main/Main.vue'),
+      },
       {
         path: '/products',
         name: 'Products',
