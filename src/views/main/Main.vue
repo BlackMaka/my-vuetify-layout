@@ -11,7 +11,7 @@
       v-for="(item, i) in items"
       :key="i"
       :src="item.src"
-      to="/products"
+      to="/product/list"
     >
       <!-- <v-sheet :color="colors[i]" height="100%">
         <v-row class="fill-height" align="center" justify="center">

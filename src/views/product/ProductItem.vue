@@ -7,7 +7,7 @@
       ($vuetify.breakpoint.mdAndUp && 700)
     "
     v-bind="$attrs"
-    to="/product-detail/3"
+    to="/product/detail/3"
   >
     <v-img
       class="white--text align-end"

@@ -38,7 +38,7 @@
                   <v-card
                     class="mt-5"
                     outlined
-                    to="/products"
+                    to="/product/list"
                     @click.stop="$emit('drawer')"
                   >
                     <v-img

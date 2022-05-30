@@ -14,37 +14,38 @@ const routes = [
       ),
     children: [
       {
-        path: '/main',
+        path: 'main',
         name: 'Main',
         component: () =>
           import(/* webpackChunkName: "main" */ '../views/main/Main.vue'),
       },
-      {
-        path: '/products',
-        name: 'Products',
-        component: () =>
-          import(
-            /* webpackChunkName: "products" */ '../views/product/ProductList.vue'
-          ),
-      },
-      {
-        path: '/product-detail/:id',
-        name: 'ProductDetail',
-        component: () =>
-          import(
-            /* webpackChunkName: "products" */ '../views/product/ProductDetail.vue'
-          ),
-      },
     ],
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    path: '/product',
+    name: 'Product',
     component: () =>
-      import(/* webpackChunkName: "about" */ '../views/About.vue'),
+      import(
+        /* webpackChunkName: "productLayout" */ '@/layouts/product/Index.vue'
+      ),
+    children: [
+      {
+        path: 'list',
+        name: 'ProductList',
+        component: () =>
+          import(
+            /* webpackChunkName: "products" */ '@/views/product/ProductList.vue'
+          ),
+      },
+      {
+        path: 'detail/:product_cd',
+        name: 'ProductDetail',
+        component: () =>
+          import(
+            /* webpackChunkName: "products" */ '@/views/product/ProductDetail.vue'
+          ),
+      },
+    ],
   },
 ];
 
