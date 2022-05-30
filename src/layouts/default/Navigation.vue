@@ -55,25 +55,21 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-divider></v-divider>
-
+        <!-- 공지메뉴2 -->
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title>자주묻는 질문</v-list-item-title>
+            <v-list-item-title>공지</v-list-item-title>
             <v-list-item-subtitle>
               <v-row justify="center">
                 <v-col cols="12">
                   <v-card class="mx-auto mt-5" outlined>
                     <v-list-item three-line>
                       <v-list-item-content>
-                        <div class="text-overline mb-4">FAQ/공지사항</div>
+                        <div class="text-overline mb-4">주제</div>
                         <v-list-item-title class="text-h5 mb-1">
-                          자주묻는 질문
+                          타이들
                         </v-list-item-title>
-                        <v-list-item-subtitle
-                          >Greyhound divisely hello coldly
-                          fonwderfully</v-list-item-subtitle
-                        >
+                        <v-list-item-subtitle> 서브 </v-list-item-subtitle>
                       </v-list-item-content>
 
                       <v-list-item-avatar
@@ -82,47 +78,6 @@
                         color="grey"
                       ></v-list-item-avatar>
                     </v-list-item>
-
-                    <v-card-actions>
-                      <v-btn outlined rounded text> 바로가기 </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-col>
-              </v-row>
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-        <v-divider></v-divider>
-
-        <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title>공지사항</v-list-item-title>
-            <v-list-item-subtitle>
-              <v-row justify="center">
-                <v-col cols="12">
-                  <v-card class="mx-auto mt-5" outlined fluid>
-                    <v-list-item three-line>
-                      <v-list-item-content>
-                        <div class="text-overline mb-4">공지사항</div>
-                        <v-list-item-title class="text-h5 mb-1">
-                          자주묻는 질문
-                        </v-list-item-title>
-                        <v-list-item-subtitle
-                          >Greyhound divisely hello coldly
-                          fonwderfully</v-list-item-subtitle
-                        >
-                      </v-list-item-content>
-
-                      <v-list-item-avatar
-                        tile
-                        size="80"
-                        color="grey"
-                      ></v-list-item-avatar>
-                    </v-list-item>
-
-                    <v-card-actions>
-                      <v-btn outlined rounded text> 바로가기 </v-btn>
-                    </v-card-actions>
                   </v-card>
                 </v-col>
               </v-row>
@@ -136,10 +91,12 @@
 
 <script>
   import BadgesCmp from '@/components/BadgesCmp.vue';
+  //import NaviMenuCard from '@/components/NaviMenuCard.vue';
   //import Avatar from '@/components/Avatar.vue';
   export default {
     components: {
       BadgesCmp,
+      // NaviMenuCard,
       //Avatar,
     },
     data() {
