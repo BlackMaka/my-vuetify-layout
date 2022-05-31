@@ -11,19 +11,19 @@
         </v-chip>
         <v-chip v-for="chip in priceChips" :key="chip.id">
           {{ chip.info.name }}
-          <v-avatar right @click="removeChip('price', chip)">
+          <v-avatar right @click="removeChip(chip)">
             <v-icon>mdi-close-circle</v-icon>
           </v-avatar>
         </v-chip>
         <v-chip v-for="chip in productTpChips" :key="chip.id">
           {{ chip.info.name }}
-          <v-avatar right @click="removeChip('prdTp', chip)">
+          <v-avatar right @click="removeChip(chip)">
             <v-icon>mdi-close-circle</v-icon>
           </v-avatar>
         </v-chip>
         <v-chip v-for="chip in rankTpChips" :key="chip.id">
           {{ chip.info.name }}
-          <v-avatar right @click="removeChip('rnkTp', chip)">
+          <v-avatar right @click="removeChip(chip)">
             <v-icon>mdi-close-circle</v-icon>
           </v-avatar>
         </v-chip>
@@ -50,8 +50,9 @@
           </v-fab-transition>
           <!-- <v-btn color="purple" dark v-bind="attrs" v-on="on"> Open In </v-btn> -->
         </template>
-        <v-list>
-          <v-subheader>
+        <v-list height="500" class="overflow-y-auto">
+          <!-- <v-subheader>
+            
             <v-row>
               <v-col cols="6">
                 <v-btn width="100%" color="white" @click="initChips()"
@@ -64,8 +65,33 @@
                 >
               </v-col>
             </v-row>
-          </v-subheader>
-          <v-divider inset></v-divider>
+          </v-subheader> -->
+          <!-- <v-divider inset></v-divider> -->
+          <v-speed-dial
+            fixed
+            v-model="fab"
+            bottom
+            right
+            direction="top"
+            :open-on-hover="hover"
+            :transition="transition"
+          >
+            <template v-slot:activator>
+              <v-btn v-model="fab" color="blue darken-2" dark fab>
+                <v-icon v-if="fab"> mdi-close </v-icon>
+                <v-icon v-else> mdi-account-circle </v-icon>
+              </v-btn>
+            </template>
+            <!-- <v-btn fab dark small color="green">
+              <v-icon>mdi-pencil</v-icon>
+            </v-btn> -->
+            <v-btn fab dark small color="indigo" @click="confirmChips()">
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <v-btn fab dark small color="red" @click="initChips()">
+              <v-icon>mdi-delete</v-icon>
+            </v-btn>
+          </v-speed-dial>
           <v-subheader>브랜드</v-subheader>
           <v-list-item v-for="category in categories" :key="category.id">
             <v-list-item-avatar>
@@ -201,6 +227,9 @@
     },
     data() {
       return {
+        fab: false,
+        hover: false,
+        transition: 'slide-y-reverse-transition',
         chips: [
           { id: 1, name: 'Programming' },
           { id: 2, name: 'Playing' },
@@ -401,7 +430,7 @@
           });
         });
 
-        //코드 줄이기
+        //코드 줄이기 (나중에)
         this.pricies.forEach((item) => {
           item.list.forEach((e) => {
             e.active = false;
@@ -428,6 +457,9 @@
       },
       addChip(item) {
         const obj = JSON.parse(item);
+        //객체에  데이터로 typeName : 'pricies', typeChipName : 'priceChips'로 넣어두고
+        //this.cmmAddChip(obj['typeName'], obj['typeChipName'], obj);
+        //한줄로 줄이는거 가능함. (나중에)
         switch (obj.type) {
           case 'pri':
             this.cmmAddChip('priceChips', 'pricies', obj);
@@ -453,6 +485,7 @@
         this[listName].push({
           info: obj.info,
           id: obj.id,
+          type: obj.type,
         });
         //dataName : this.pricies
         this[dataName] = this[dataName].map((price) => {
@@ -466,6 +499,36 @@
 
           return price;
         });
+      },
+      removeChip(item) {
+        switch (item.type) {
+          case 'pri':
+            this.priceChips = [];
+            this.pricies.forEach((item) => {
+              item.list.forEach((item2) => {
+                item2.active = false;
+              });
+            });
+            break;
+          case 'ptp':
+            //productTpChips: [],
+            this.productTpChips = [];
+            this.productTypes.forEach((item) => {
+              item.list.forEach((item2) => {
+                item2.active = false;
+              });
+            });
+            break;
+          case 'rnk':
+            //rankTpChips: [], //new popular recomand
+            this.rankTpChips = [];
+            this.rankTypes.forEach((item) => {
+              item.list.forEach((item2) => {
+                item2.active = false;
+              });
+            });
+            break;
+        }
       },
       close(item) {
         // this.chips.splice(this.chips.indexOf(item.id), 1);
