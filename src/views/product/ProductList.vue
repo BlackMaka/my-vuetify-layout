@@ -240,7 +240,7 @@
           { id: 7, name: 'Watching' },
           { id: 8, name: 'Sleeping' },
         ],
-        sheet: true,
+        sheet: false,
         brandChips: [],
         priceChips: [],
         productTpChips: [],
