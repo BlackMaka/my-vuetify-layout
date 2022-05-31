@@ -48,7 +48,7 @@
       };
     },
     mounted() {
-      console.log(this.$vuetify.breakpoint.md);
+      //console.log(this.$vuetify.breakpoint.md);
     },
   };
 </script>

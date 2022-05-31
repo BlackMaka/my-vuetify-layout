@@ -1,12 +1,36 @@
 <template>
   <v-container fluid>
+    <!-- sticky 배너영역 -->
     <v-banner app sticky class="grey lighten-5" bottom style="z-index: 1">
-      <v-chip-group mandatory>
-        <v-chip v-for="chip in bannerChips" :key="chip.brand_cd">
-          {{ chip.name }}
+      <v-chip-group>
+        <v-chip v-for="chip in brandChips" :key="chip.id">
+          {{ chip.brand.name }}
+          <v-avatar right @click="removeBrand(chip)">
+            <v-icon>mdi-close-circle</v-icon>
+          </v-avatar>
+        </v-chip>
+        <v-chip v-for="chip in priceChips" :key="chip.id">
+          {{ chip.info.name }}
+          <v-avatar right @click="removeChip('price', chip)">
+            <v-icon>mdi-close-circle</v-icon>
+          </v-avatar>
+        </v-chip>
+        <v-chip v-for="chip in productTpChips" :key="chip.id">
+          {{ chip.info.name }}
+          <v-avatar right @click="removeChip('prdTp', chip)">
+            <v-icon>mdi-close-circle</v-icon>
+          </v-avatar>
+        </v-chip>
+        <v-chip v-for="chip in rankTpChips" :key="chip.id">
+          {{ chip.info.name }}
+          <v-avatar right @click="removeChip('rnkTp', chip)">
+            <v-icon>mdi-close-circle</v-icon>
+          </v-avatar>
         </v-chip>
       </v-chip-group></v-banner
     >
+    <!-- sticky 배너영역 -->
+    <!-- bottom sheet 영역 -->
     <div class="text-center">
       <v-bottom-sheet v-model="sheet" persistent>
         <template v-slot:activator="{ on, attrs }">
@@ -28,10 +52,21 @@
         </template>
         <v-list>
           <v-subheader>
-            <v-btn width="100%" color="success" @click="sheet = false"
-              >확인</v-btn
-            >
+            <v-row>
+              <v-col cols="6">
+                <v-btn width="100%" color="white" @click="initChips()"
+                  >초기화</v-btn
+                >
+              </v-col>
+              <v-col cols="6">
+                <v-btn width="100%" color="success" @click="confirmChips()"
+                  >확인</v-btn
+                >
+              </v-col>
+            </v-row>
           </v-subheader>
+          <v-divider inset></v-divider>
+          <v-subheader>브랜드</v-subheader>
           <v-list-item v-for="category in categories" :key="category.id">
             <v-list-item-avatar>
               <v-avatar size="32px" tile>
@@ -41,19 +76,53 @@
                 />
               </v-avatar>
             </v-list-item-avatar>
-            <v-chip-group mandatory active-class="primary--text">
+            <v-chip-group mandatory>
               <v-chip
                 v-for="brand in category.brands"
                 :key="brand.brand_cd"
-                @click="selectBrands(category, brand)"
+                @click="addBrand(category, brand)"
+                :class="{
+                  'primary--text': brand.active,
+                  ' v-chip--active': brand.active,
+                }"
               >
                 {{ brand.name }}
               </v-chip>
             </v-chip-group>
           </v-list-item>
+          <!-- 가격 -->
+          <!-- <v-divider inset></v-divider>
+          <v-subheader>가격</v-subheader>
+          <v-list-item v-for="price in pricies" :key="price.id">
+            <v-list-item-avatar>
+              <v-avatar size="32px" tile>
+                <img
+                  :src="`https://cdn.vuetifyjs.com/images/bottom-sheets/${price.img}`"
+                  :alt="price.alt"
+                />
+              </v-avatar>
+            </v-list-item-avatar>
+            <v-chip-group mandatory>
+              <v-chip
+                v-for="priceInfo in price.list"
+                :key="priceInfo.price_cd"
+                @click="addPrice(priceInfo)"
+                :class="{
+                  'primary--text': priceInfo.active,
+                  ' v-chip--active': priceInfo.active,
+                }"
+              >
+                {{ priceInfo.name }}
+              </v-chip>
+            </v-chip-group>
+          </v-list-item> -->
+          <ChipCmp :itemList="pricies" @addChipEmit="addChip"></ChipCmp>
+          <ChipCmp :itemList="productTypes" @addChipEmit="addChip"></ChipCmp>
+          <ChipCmp :itemList="rankTypes" @addChipEmit="addChip"></ChipCmp>
         </v-list>
       </v-bottom-sheet>
     </div>
+    <!-- bottom sheet 영역 -->
     <!-- dddddddddddddddddddddddddddddddddddddddddddddddddd -->
     <BackGroundCmp roundCustom class="grey lighten-2 mt-5 mb-3 mx-3 px-3">
       <v-row justify="center" v-for="i in 2" :key="i">
@@ -81,34 +150,6 @@
             />
           </v-card>
         </v-col>
-
-        <!-- <v-col>
-          <v-checkbox
-            label="편의점"
-            color="secondary"
-            value="편의점"
-            hide-details
-            class="mb-3 mx-3"
-          ></v-checkbox>
-        </v-col>
-        <v-col>
-          <v-checkbox
-            label="편의점"
-            color="secondary"
-            value="편의점"
-            hide-details
-            class="mb-3 mx-3"
-          ></v-checkbox>
-        </v-col>
-        <v-col>
-          <v-checkbox
-            label="편의점"
-            color="secondary"
-            value="편의점"
-            hide-details
-            class="mb-3 mx-3"
-          ></v-checkbox>
-        </v-col> -->
       </v-row>
     </BackGroundCmp>
 
@@ -150,10 +191,13 @@
 <script>
   import ProductItems from '@/views/product/ProductItems.vue';
   import BackGroundCmp from '@/components/BackGroundCmp.vue';
+  import ChipCmp from '@/views/product/components/ChipCmp.vue';
+
   export default {
     components: {
       ProductItems,
       BackGroundCmp,
+      ChipCmp,
     },
     data() {
       return {
@@ -167,8 +211,12 @@
           { id: 7, name: 'Watching' },
           { id: 8, name: 'Sleeping' },
         ],
-        sheet: false,
-        bannerChips: [],
+        sheet: true,
+        brandChips: [],
+        priceChips: [],
+        productTpChips: [],
+        rankTpChips: [], //new popular recomand
+
         categories: [
           {
             id: 1,
@@ -176,11 +224,11 @@
             alt: 'Keep',
             name: '카페',
             brands: [
-              { name: '스타벅스', brand_cd: 'a1' },
-              { name: '커핀그루나루', brand_cd: 'a2' },
-              { name: '투썸플레이스', brand_cd: 'a3' },
-              { name: '스무디킹', brand_cd: 'a4' },
-              { name: '쥬씨', brand_cd: 'a5' },
+              { name: '스타벅스', brand_cd: 'a1', active: false },
+              { name: '커핀그루나루', brand_cd: 'a2', active: false },
+              { name: '투썸플레이스', brand_cd: 'a3', active: false },
+              { name: '스무디킹', brand_cd: 'a4', active: false },
+              { name: '쥬씨', brand_cd: 'a5', active: false },
             ],
           },
           {
@@ -189,8 +237,8 @@
             alt: 'Inbox',
             name: '치킨',
             brands: [
-              { name: '교촌치킨', brand_cd: 'b1' },
-              { name: '호치킨', brand_cd: 'b2' },
+              { name: '교촌치킨', brand_cd: 'b1', active: false },
+              { name: '호치킨', brand_cd: 'b2', active: false },
             ],
           },
           {
@@ -199,8 +247,8 @@
             alt: 'Hangouts',
             name: '편의점',
             brands: [
-              { name: 'CU', brand_cd: 'c1' },
-              { name: 'GS25', brand_cd: 'c2' },
+              { name: 'CU', brand_cd: 'c1', active: false },
+              { name: 'GS25', brand_cd: 'c2', active: false },
             ],
           },
           {
@@ -209,11 +257,11 @@
             alt: 'Messenger',
             name: '상품권',
             brands: [
-              { name: '롯데멤버스', brand_cd: 'd1' },
-              { name: '쿠팡이즈', brand_cd: 'd2' },
-              { name: 'PCM코리아', brand_cd: 'd3' },
-              { name: '컬쳐랜드', brand_cd: 'd4' },
-              { name: '요기요', brand_cd: 'd5' },
+              { name: '롯데멤버스', brand_cd: 'd1', active: false },
+              { name: '쿠팡이즈', brand_cd: 'd2', active: false },
+              { name: 'PCM코리아', brand_cd: 'd3', active: false },
+              { name: '컬쳐랜드', brand_cd: 'd4', active: false },
+              { name: '요기요', brand_cd: 'd5', active: false },
             ],
           },
           {
@@ -222,11 +270,58 @@
             alt: 'Google+',
             name: '기타',
             brands: [
-              { name: '페이즈', brand_cd: 'e1' },
-              { name: '소품상품', brand_cd: 'e2' },
-              { name: '글라스박스', brand_cd: 'e3' },
-              { name: '인터컨티넨탈', brand_cd: 'e4' },
-              { name: '배송상품', brand_cd: 'e5' },
+              { name: '페이즈', brand_cd: 'e1', active: false },
+              { name: '소품상품', brand_cd: 'e2', active: false },
+              { name: '글라스박스', brand_cd: 'e3', active: false },
+              { name: '인터컨티넨탈', brand_cd: 'e4', active: false },
+              { name: '배송상품', brand_cd: 'e5', active: false },
+            ],
+          },
+        ],
+        pricies: [
+          {
+            id: 333,
+            type: 'pri',
+            img: 'keep.png',
+            alt: 'Keep',
+            name: '가격',
+            list: [
+              { name: '3천원 미만', item_cd: 'p1', active: false },
+              { name: '3천원 ~ 5천원 미만', item_cd: 'p2', active: false },
+              { name: '5천원 ~ 1만원 미만', item_cd: 'p3', active: false },
+              { name: '1만원 ~ 3만원 미만', item_cd: 'p4', active: false },
+              { name: '3만원 ~ 5만원 미만', item_cd: 'p5', active: false },
+              { name: '5만원 ~ 10만원 미만', item_cd: 'p6', active: false },
+              { name: '10만원 이상', item_cd: 'p7', active: false },
+            ],
+          },
+        ],
+        productTypes: [
+          {
+            id: 444,
+            type: 'ptp',
+            img: 'keep.png',
+            alt: 'Keep',
+            name: '상품유형',
+            list: [
+              { name: '상품교환권', item_cd: 'pt1', active: false },
+              { name: '금액상품권', item_cd: 'pt2', active: false },
+              { name: '지류상품권', item_cd: 'pt3', active: false },
+              { name: '배송상품권', item_cd: 'pt4', active: false },
+            ],
+          },
+        ],
+        rankTypes: [
+          {
+            id: 555,
+            type: 'rnk',
+            img: 'keep.png',
+            alt: 'Keep',
+            name: '랭킹순',
+            list: [
+              { name: '신규상품', item_cd: 'new', active: false },
+              { name: '인기상품(판매수량별)', item_cd: 'pop', active: false },
+              { name: '추천상품(어드민정의)', item_cd: 'adm', active: false },
             ],
           },
         ],
@@ -238,20 +333,139 @@
       },
     },
     methods: {
-      selectBrands(category, brand) {
-        if (this.bannerChips.length > 0) {
-          this.bannerChips = this.bannerChips.filter((chip) => {
-            return chip.id !== category.id;
+      //배너용 브랜드 칩 등록, 카테고리 acitve 활성
+      addBrand(categoryItem, brandItem) {
+        if (this.brandChips.length > 0) {
+          this.brandChips = []; //배너칩스 초기화
+          this.brandChips = this.brandChips.filter((chip) => {
+            return chip.id !== categoryItem.id;
           });
         }
+        this.brandChips.push({
+          brand: brandItem,
+          id: categoryItem.id,
+        });
 
-        this.bannerChips.push({
-          ...brand,
-          id: category.id,
+        this.setCategories({
+          type: 'add',
+          categoryId: categoryItem.id,
+          brandItem,
+          isActive: true,
         });
       },
-      aa() {
-        console.log('ih');
+      //배너용 브랜드칩 삭제, 카테고리 acitve 해제
+      removeBrand(item) {
+        const categoryId = item.id;
+        this.brandChips = this.brandChips.filter((chip) => {
+          return chip.id !== categoryId;
+        });
+        this.setCategories({
+          type: 'remove',
+          categoryId,
+          brandItem: item.brand,
+          isActive: false,
+        });
+      },
+      //카테고리 데이터 셋팅 add, remove
+      setCategories(item) {
+        const { type, categoryId, brandItem, isActive } = item;
+        console.log(type);
+        console.log(categoryId);
+        this.categories = this.categories.map((category) => {
+          category.brands.map((brand) => {
+            //add일때만 추가되는 로직 (같은 카테고리의 다른 브랜드 선택시 올 false)
+            // if (type === 'add' && categoryId === category.id) {
+            //   brand.active = false;
+            // }
+            if (type === 'add') {
+              brand.active = false;
+            }
+            //선택 칩 add일시 true로 변경, remove일시 false로 변경
+            if (brand.brand_cd === brandItem.brand_cd) {
+              brand.active = isActive;
+            }
+            return brand;
+          });
+          return category;
+        });
+      },
+      // 바텀시트 초기화버튼 배너칩 및 카테고리 초기셋팅
+      initChips() {
+        this.brandChips = [];
+        this.priceChips = [];
+        this.productTpChips = [];
+        this.rankTpChips = [];
+        this.categories.forEach((category) => {
+          category.brands.forEach((brand) => {
+            brand.active = false;
+          });
+        });
+
+        //코드 줄이기
+        this.pricies.forEach((item) => {
+          item.list.forEach((e) => {
+            e.active = false;
+          });
+        });
+        this.productTypes.forEach((item) => {
+          item.list.forEach((e) => {
+            e.active = false;
+          });
+        });
+        this.rankTypes.forEach((item) => {
+          item.list.forEach((e) => {
+            e.active = false;
+          });
+        });
+        this.closeBottomSheet();
+      },
+      // 바텀시트 확인버튼 배너칩 및 카테고리 확정셋팅
+      confirmChips() {
+        this.closeBottomSheet();
+      },
+      closeBottomSheet() {
+        this.sheet = false;
+      },
+      addChip(item) {
+        const obj = JSON.parse(item);
+        switch (obj.type) {
+          case 'pri':
+            this.cmmAddChip('priceChips', 'pricies', obj);
+            break;
+          case 'ptp':
+            //productTpChips: [],
+            this.cmmAddChip('productTpChips', 'productTypes', obj);
+            break;
+          case 'rnk':
+            //rankTpChips: [], //new popular recomand
+            this.cmmAddChip('rankTpChips', 'rankTypes', obj);
+            break;
+        }
+      },
+      cmmAddChip(listName, dataName, obj) {
+        //listName : this.priceChips ...
+        if (this[listName].length > 0) {
+          this[listName] = []; //배너칩스 초기화
+          this[listName] = this[listName].filter((chip) => {
+            return chip.id !== obj.id;
+          });
+        }
+        this[listName].push({
+          info: obj.info,
+          id: obj.id,
+        });
+        //dataName : this.pricies
+        this[dataName] = this[dataName].map((price) => {
+          price.list.map((info) => {
+            info.active = false;
+            if (info.item_cd === obj.info.item_cd) {
+              info.active = true;
+            }
+            return info;
+          });
+
+          return price;
+        });
       },
       close(item) {
         // this.chips.splice(this.chips.indexOf(item.id), 1);
