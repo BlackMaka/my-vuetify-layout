@@ -149,80 +149,22 @@
       </v-bottom-sheet>
     </div>
     <!-- bottom sheet 영역 -->
-    <!-- dddddddddddddddddddddddddddddddddddddddddddddddddd -->
-    <BackGroundCmp roundCustom class="grey lighten-2 mt-5 mb-3 mx-3 px-3">
-      <v-row justify="center" v-for="i in 2" :key="i">
-        <v-col cols="4">
-          <v-card>
-            <v-img
-              class="white--text align-end"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            />
-          </v-card>
-        </v-col>
-        <v-col cols="4">
-          <v-card>
-            <v-img
-              class="white--text align-end"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            />
-          </v-card>
-        </v-col>
-        <v-col cols="4">
-          <v-card>
-            <v-img
-              class="white--text align-end"
-              src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
-            />
-          </v-card>
-        </v-col>
-      </v-row>
-    </BackGroundCmp>
 
-    <BackGroundCmp
-      roundCustom
-      class="grey lighten-2 mt-8 mb-3 mx-3 overflow-x-auto overflow-y-hidden"
-      style="display: flex"
-      outlined
-    >
-      <v-row justify="center">
-        <v-col cols="auto">
-          <div style="display: inline-flex">
-            <!-- <span v-for="item in chips" :key="item.id">{{ item.name }}</span> -->
-            <v-chip
-              color="teal"
-              class="ma-2"
-              text-color="white"
-              v-for="item in chips"
-              :key="item.id"
-            >
-              {{ item.name }}
-              <v-avatar right @click="close(item)">
-                <v-icon>mdi-checkbox-marked-circle</v-icon>
-              </v-avatar>
-            </v-chip>
-          </div>
-        </v-col>
-      </v-row>
-    </BackGroundCmp>
-
-    <BackGroundCmp roundCustom class="grey lighten-2 mt-8 mb-3 mx-3">
-      <ProductItems />
-    </BackGroundCmp>
-
+    <!-- <BackGroundCmp roundCustom class="grey lighten-2 mt-8 mb-3 mx-3">
+    </BackGroundCmp> -->
+    <ProductItems />
     <!-- <ProductItems /> -->
   </v-container>
 </template>
 
 <script>
   import ProductItems from '@/views/product/ProductItems.vue';
-  import BackGroundCmp from '@/components/BackGroundCmp.vue';
+  //import BackGroundCmp from '@/components/BackGroundCmp.vue';
   import ChipCmp from '@/views/product/components/ChipCmp.vue';
 
   export default {
     components: {
       ProductItems,
-      BackGroundCmp,
       ChipCmp,
     },
     data() {
@@ -537,6 +479,10 @@
           return chip.id != item.id;
         });
       },
+    },
+    mounted() {
+      console.log(this.$route.params.search); //이거로 여기서 api호출 날려서 조회한다음
+      //프롭스로 아이템리스트 뿌려주기
     },
   };
 </script>

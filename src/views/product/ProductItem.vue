@@ -1,4 +1,38 @@
 <template>
+  <v-card class="mx-auto" outlined to="/product/detail/3">
+    <v-list-item three-line>
+      <v-list-item-avatar tile size="120" color="grey">
+        <v-img
+          src="https://dliveimg.kbnc.co.kr/shop/upload/title/309/0000000000685971653262694385_title.png"
+        ></v-img>
+      </v-list-item-avatar>
+      <v-list-item-content>
+        <div class="text-subtitle-2 mb-1">
+          [내셔널지오그래픽] 22년 신상 친환경 효성 REGEN 반팔티 2종 택1
+        </div>
+        <v-list-item-title class="text-subtitle-1 mb-1">
+          <span class="font-weight-medium mr-2">49%</span>
+          <del style="color: grey">79,000원</del>
+        </v-list-item-title>
+        <v-list-item-subtitle class="text-h6" style="color: red"
+          >40,500원
+        </v-list-item-subtitle>
+      </v-list-item-content>
+    </v-list-item>
+  </v-card>
+</template>
+
+<script>
+  export default {};
+</script>
+
+<style scoped>
+  .v-list-item__content {
+    padding: 16px 0;
+  }
+</style>
+<!--
+<template>
   <v-card
     class="mx-auto"
     :max-width="
@@ -24,13 +58,6 @@
 
       <div><del>45,000</del></div>
     </v-card-text>
-
-    <!-- <div align="center">
-      <v-btn color="black" dark width="95%" class="my-2">
-        구매하기 -->
-    <!-- <v-icon>mdi-purse-outline</v-icon> -->
-    <!-- </v-btn>
-    </div> -->
   </v-card>
 </template>
 
@@ -47,10 +74,9 @@
         overlay: false,
       };
     },
-    mounted() {
-      //console.log(this.$vuetify.breakpoint.md);
-    },
+    mounted() {},
   };
 </script>
 
 <style></style>
+ -->
